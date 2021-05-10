@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'brain.dart';
-import 'variables.dart';
 void main(){
   runApp(MyApp());
 }
