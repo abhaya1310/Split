@@ -1,10 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'brain.dart';
+import 'variables.dart';
 void main(){
   runApp(MyApp());
 }
 
+String name;
+var amount;
+
 class MyApp extends StatelessWidget {
+  final Brain obj = Brain();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -37,6 +43,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+// ignore: must_be_immutable
 class MyCustomForm extends StatefulWidget {
   @override
   MyCustomFormState createState() {
@@ -55,6 +62,9 @@ class MyCustomFormState extends State<MyCustomForm> {
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
               child: TextField(
+                onChanged: (text) {
+                  name = text;
+                },
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Enter Name',
@@ -67,6 +77,9 @@ class MyCustomFormState extends State<MyCustomForm> {
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
               child: TextFormField(
+                onChanged: (amt){
+                  amount = int.parse(amt);
+                },
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Enter amount spent',
@@ -87,6 +100,9 @@ class AddIcon extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(bottom: 0.0,right: 0.0),
       child: FloatingActionButton(
+        onPressed: ()=>{
+           MyApp().obj.updateRecord(name,amount)
+        },
         child: Icon(
           Icons.add_circle,
           size: 50,
@@ -105,12 +121,14 @@ class Buttons extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           TextButton(
+            onPressed: ()=>MyApp().obj.clear(),
             style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.red)),
             child:
             Text('Reset',),
 
           ),
           TextButton(
+            onPressed: () => MyApp().obj.calculate(),
             style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.green)),
             child:
             Text('Calculate',),
