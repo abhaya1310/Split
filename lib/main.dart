@@ -7,9 +7,9 @@ void main(){
 
 String name;
 var amount;
+Brain obj = Brain();
 
 class MyApp extends StatelessWidget {
-  final Brain obj = Brain();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -100,7 +100,7 @@ class AddIcon extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 0.0,right: 0.0),
       child: FloatingActionButton(
         onPressed: ()=>{
-           MyApp().obj.updateRecord(name,amount)
+           obj.updateRecord(name,amount)
         },
         child: Icon(
           Icons.add_circle,
@@ -120,14 +120,14 @@ class Buttons extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           TextButton(
-            onPressed: ()=>MyApp().obj.clear(),
+            onPressed: ()=> obj.clear(),
             style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.red)),
             child:
             Text('Reset',),
 
           ),
           TextButton(
-            onPressed: () => MyApp().obj.calculate(),
+            onPressed: () => obj.calculate(),
             style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.green)),
             child:
             Text('Calculate',),
